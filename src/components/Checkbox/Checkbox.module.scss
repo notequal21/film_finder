@@ -1,0 +1,51 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  input {
+    display: none;
+
+    &:checked + .checkbox__fake {
+      border: 1.5px solid #ffffff;
+      img {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__fake {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+
+    transition: all 0.4s ease;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+
+      transform: scale(0);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+  }
+
+  &__text {
+    margin: 0 0 0 8px;
+
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 158.7%;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+  }
+}

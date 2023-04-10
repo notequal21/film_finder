@@ -1,0 +1,47 @@
+.header {
+  position: relative;
+  margin: 48px 0 0;
+
+  &Body {
+    display: flex;
+    justify-content: center;
+
+    &__logo {
+    }
+  }
+
+  &__bgElem01 {
+    position: absolute;
+    top: -205px;
+    left: -158px;
+    width: 330px;
+    height: 320px;
+
+    background: linear-gradient(0deg, #ffafdf, #ffafdf), #fe7170;
+    opacity: 0.2;
+    filter: blur(62px);
+    transform: rotate(-38.48deg);
+
+    -webkit-transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
+  }
+  &__bgElem02 {
+    position: absolute;
+    top: -258px;
+    right: -216px;
+    width: 325px;
+    height: 402px;
+
+    background: #ff1a88;
+    opacity: 0.23;
+    filter: blur(75px);
+    transform: rotate(23.07deg);
+
+    -webkit-transform: translateZ(0);
+    perspective: 1000;
+    -webkit-perspective: 1000;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}

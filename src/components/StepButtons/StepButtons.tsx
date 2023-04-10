@@ -1,33 +1,56 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
+import style from './StepButtons.module.scss';
+import { useAppDispatch } from '../../store/hooks';
+import { clearSpecific } from '../../store/querySlice';
 
-const StepButtons = ({ isNextStepAllow, setCurrentStep }: any) => {
+const StepButtons = ({
+  confirmStep,
+  isNextStepAllow,
+  currentStep,
+  setCurrentStep,
+  isFinalStep,
+}: any) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
-    <div className='step-btns'>
+    <div className={style.btns}>
+      {isFinalStep ? (
+        ''
+      ) : (
+        <Button
+          onClick={() => {
+            confirmStep();
+            isNextStepAllow && setCurrentStep(++currentStep);
+          }}
+          disabled={!isNextStepAllow}
+          className={style.btns__item}
+        >
+          Продолжить
+        </Button>
+      )}
       <Button
         onClick={() => {
-          isNextStepAllow && setCurrentStep(1);
-        }}
-        disabled={!isNextStepAllow}
-        className='step-btns__item'
-      >
-        Продолжить
-      </Button>
-      <Button
-        onClick={() => {
-          setCurrentStep(1);
+          confirmStep();
+          setCurrentStep(++currentStep);
         }}
         transparent
-        className='step-btns__item'
+        className={style.btns__item}
       >
         Пропустить
       </Button>
       <Button
-        onClick={() => navigate('/')}
+        onClick={() => {
+          if (currentStep > 0) {
+            setCurrentStep(--currentStep);
+            dispatch(clearSpecific(currentStep));
+          } else {
+            navigate('/');
+          }
+        }}
         transparent
-        className='step-btns__item'
+        className={style.btns__item}
       >
         Назад
       </Button>

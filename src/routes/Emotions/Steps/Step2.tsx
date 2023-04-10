@@ -4,15 +4,18 @@ import StepButtons from '../../../components/StepButtons/StepButtons';
 
 const checkboxList: any = [
   [
-    'Грусть',
-    'Вдохновение',
-    'Напряжение и волнение',
-    'Приключения и увлекательный сюжет',
+    'Глубокий смысл и философия',
+    'Качественный сценарий и режиссура',
+    'Хорошо снятые сцены и спецэффекты',
   ],
-  ['Страх', 'Романтика', 'Свой вариант'],
+  [
+    'Профессиональная игра актеров',
+    'Красивая музыка и звуковое сопровождение',
+    'Свой вариант',
+  ],
 ];
 
-const Step1 = ({ setCurrentStep }: any) => {
+const Step2 = ({ setCurrentStep }: any) => {
   const [isNextStepAllow, setIsNextStepAllow] = useState(false);
 
   const allowCheck = () => {
@@ -30,7 +33,7 @@ const Step1 = ({ setCurrentStep }: any) => {
   return (
     <div className='step'>
       <div className='step__question'>
-        1. Какие эмоции ты хотел бы испытать, просматривая фильм?
+        2. Что для тебя важнее всего в фильме?
       </div>
       <div className='step-checkboxes'>
         {checkboxList.map((item: any, index: number) => (
@@ -57,4 +60,4 @@ const Step1 = ({ setCurrentStep }: any) => {
   );
 };
 
-export default Step1;
+export default Step2;

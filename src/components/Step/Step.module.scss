@@ -1,0 +1,36 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0 0;
+
+  &__question {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+  }
+
+  &__input {
+    flex: 1 1 auto;
+    margin: 45px auto 0;
+  }
+
+  &Checkboxes {
+    margin: 40px 0 0;
+    display: flex;
+    justify-content: center;
+
+    &__col {
+      &:not(:first-child) {
+        margin: 0 0 0 34px;
+      }
+    }
+    &__item {
+      &:not(:first-child) {
+        margin: 22px 0 0;
+      }
+    }
+  }
+}

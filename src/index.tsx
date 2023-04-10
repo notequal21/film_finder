@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { store } from './store/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
@@ -11,6 +11,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Hello from './routes/Hello/Hello';
 import Similar from './routes/Similar/Similar';
 import Emotions from './routes/Emotions/Emotions';
+import Condition from './routes/Condition/Condition';
+import Result from './routes/Result/Result';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'emotions',
         element: <Emotions />,
+      },
+      {
+        path: 'condition',
+        element: <Condition />,
+      },
+      {
+        path: 'result',
+        element: <Result />,
       },
       {
         path: '*',

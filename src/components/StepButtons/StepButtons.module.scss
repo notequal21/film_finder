@@ -1,0 +1,11 @@
+.btns {
+  margin: 40px 0 0;
+  display: flex;
+  justify-content: center;
+
+  &__item {
+    &:not(:first-child) {
+      margin: 0 0 0 10px;
+    }
+  }
+}

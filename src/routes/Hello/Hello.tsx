@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import Button from '../../components/Button/Button';
+import { useAppDispatch } from '../../store/hooks';
 import style from './Hello.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { clearAll } from '../../store/querySlice';
 
 const Hello = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(clearAll());
+  }, []);
 
   return (
     <div className={style.start}>
@@ -14,6 +22,7 @@ const Hello = () => {
           </div>
           <div className={`${style.startBody__btns} screen-btns`}>
             <Button
+              onClick={() => navigate('/condition')}
               className={`${style.startBody__btnsItem} screen-btns__item`}
             >
               Поиск по критериям

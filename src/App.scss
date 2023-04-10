@@ -1,6 +1,8 @@
 .screen {
   &-body {
-    max-width: 790px;
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
     margin: 0 auto;
   }
 
@@ -27,48 +29,6 @@
     &__item {
       &:not(:first-child) {
         margin: 0 0 0 14px;
-      }
-    }
-  }
-}
-
-.step {
-  margin: 24px 0 0;
-
-  &__question {
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 150%;
-    text-align: center;
-    letter-spacing: -0.03em;
-    color: #ffffff;
-  }
-
-  &-checkboxes {
-    margin: 40px 0 0;
-    display: flex;
-    justify-content: center;
-
-    &__col {
-      &:not(:first-child) {
-        margin: 0 0 0 34px;
-      }
-    }
-    &__item {
-      &:not(:first-child) {
-        margin: 22px 0 0;
-      }
-    }
-  }
-
-  &-btns {
-    margin: 40px 0 0;
-    display: flex;
-    justify-content: center;
-
-    &__item {
-      &:not(:first-child) {
-        margin: 0 0 0 10px;
       }
     }
   }

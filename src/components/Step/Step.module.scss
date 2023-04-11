@@ -10,6 +10,26 @@
     text-align: center;
     letter-spacing: -0.03em;
     color: #ffffff;
+
+    @media (max-width: 991px) {
+      font-size: 18px;
+      line-height: 150%;
+
+      br {
+        display: none;
+      }
+    }
+  }
+
+  &__subtitle {
+    margin: 14px auto 0;
+    max-width: 580px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.03em;
+    color: #ffffff;
   }
 
   &__input {
@@ -22,9 +42,18 @@
     display: flex;
     justify-content: center;
 
+    @media (max-width: 767px) {
+      margin: 26px 0 0;
+      flex-direction: column;
+    }
+
     &__col {
       &:not(:first-child) {
         margin: 0 0 0 34px;
+
+        @media (max-width: 767px) {
+          margin: 22px 00;
+        }
       }
     }
     &__item {
@@ -32,5 +61,13 @@
         margin: 22px 0 0;
       }
     }
+  }
+}
+
+.submit {
+  margin: 130px auto 0;
+
+  @media (max-width: 991px) {
+    margin: 56px 0 0;
   }
 }

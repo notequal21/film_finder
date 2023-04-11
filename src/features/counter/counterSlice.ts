@@ -73,6 +73,7 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
+
 // export const incrementIfOdd =
 //   (amount: number): AppThunk =>
 //   (dispatch, getState) => {

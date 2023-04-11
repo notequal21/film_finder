@@ -1,18 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import style from './StepButtons.module.scss';
-import { useAppDispatch } from '../../store/hooks';
-import { clearSpecific } from '../../store/querySlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {
+  clearSpecific,
+  getResultAsync,
+  selectQuery,
+} from '../../store/querySlice';
+import { nextStep, prevStep, selectCurrentStep } from '../../store/stepsSlice';
 
 const StepButtons = ({
   confirmStep,
+  confirmEmptyStep,
   isNextStepAllow,
-  currentStep,
-  setCurrentStep,
   isFinalStep,
 }: any) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const currentStep = useAppSelector(selectCurrentStep);
+  const queryData = useAppSelector(selectQuery);
 
   return (
     <div className={style.btns}>
@@ -22,7 +28,7 @@ const StepButtons = ({
         <Button
           onClick={() => {
             confirmStep();
-            isNextStepAllow && setCurrentStep(++currentStep);
+            isNextStepAllow && dispatch(nextStep());
           }}
           disabled={!isNextStepAllow}
           className={style.btns__item}
@@ -32,8 +38,14 @@ const StepButtons = ({
       )}
       <Button
         onClick={() => {
-          confirmStep();
-          setCurrentStep(++currentStep);
+          confirmEmptyStep();
+
+          if (isFinalStep) {
+            dispatch(getResultAsync(queryData.steps));
+            navigate('/result');
+          } else {
+            dispatch(nextStep());
+          }
         }}
         transparent
         className={style.btns__item}
@@ -43,8 +55,8 @@ const StepButtons = ({
       <Button
         onClick={() => {
           if (currentStep > 0) {
-            setCurrentStep(--currentStep);
-            dispatch(clearSpecific(currentStep));
+            dispatch(prevStep());
+            dispatch(clearSpecific(currentStep - 1));
           } else {
             navigate('/');
           }

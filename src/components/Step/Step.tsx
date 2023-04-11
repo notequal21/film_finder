@@ -3,32 +3,41 @@ import style from './Step.module.scss';
 import Checkbox from '../Checkbox/Checkbox';
 import StepButtons from '../StepButtons/StepButtons';
 import InputStep from '../InputStep/InputStep';
-import { useAppDispatch } from '../../store/hooks';
-import { addQueryStep } from '../../store/querySlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {
+  addQueryStep,
+  getResultAsync,
+  selectQuery,
+} from '../../store/querySlice';
 import Button from '../Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 interface IStep {
   question: string;
   checkboxList: any;
   currentStep: any;
-  setCurrentStep: any;
+  subtitle?: string;
   hideBtns?: boolean;
   userInput?: boolean;
   isFinalStep?: boolean;
+  inputPlaceholder?: string;
 }
 
 const Step = ({
   question,
   checkboxList,
   currentStep,
-  setCurrentStep,
   hideBtns,
   userInput,
   isFinalStep,
+  subtitle,
+  inputPlaceholder,
 }: IStep) => {
   const dispatch = useAppDispatch();
   const [isNextStepAllow, setIsNextStepAllow] = useState(false);
   const [userChoiceActive, setUserChoiceActive] = useState(false);
+  const navigate = useNavigate();
+  const queryData = useAppSelector(selectQuery);
 
   const allowCheck = () => {
     const checkboxes = Array.from(
@@ -54,9 +63,16 @@ const Step = ({
     dispatch(addQueryStep(checkedList));
   };
 
+  const confirmEmptyStep = () => {
+    dispatch(addQueryStep([]));
+  };
+
   return (
     <div className={style.step}>
-      <div className={style.step__question}>{question}</div>
+      <div
+        className={style.step__question}
+        dangerouslySetInnerHTML={{ __html: question }}
+      ></div>
 
       {userChoiceActive ? (
         <InputStep
@@ -64,7 +80,8 @@ const Step = ({
           setIsNextStepAllow={setIsNextStepAllow}
           isNextStepAllow={isNextStepAllow}
           currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
+          isCustomInput
+          setUserChoiceActive={setUserChoiceActive}
         />
       ) : checkboxList ? (
         <div className={style.stepCheckboxes}>
@@ -96,8 +113,13 @@ const Step = ({
           setIsNextStepAllow={setIsNextStepAllow}
           isNextStepAllow={isNextStepAllow}
           currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-          placeholder={isFinalStep ? 'Предпочтения' : 'Введите год или период'}
+          placeholder={
+            isFinalStep
+              ? 'Предпочтения'
+              : inputPlaceholder
+              ? inputPlaceholder
+              : 'Введите год или период'
+          }
           canSkip
           isFinalStep={isFinalStep}
         />
@@ -105,16 +127,32 @@ const Step = ({
         ''
       )}
 
+      {subtitle ? <div className={style.step__subtitle}>{subtitle}</div> : ''}
+
       {hideBtns ? (
         ''
       ) : (
         <StepButtons
           confirmStep={confirmStep}
+          confirmEmptyStep={confirmEmptyStep}
           isNextStepAllow={isNextStepAllow}
           currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
           isFinalStep={isFinalStep}
         />
+      )}
+
+      {currentStep > 0 ? (
+        <Button
+          onClick={() => {
+            dispatch(getResultAsync(queryData.steps));
+            navigate('/result');
+          }}
+          className={style.submit}
+        >
+          Начать поиск
+        </Button>
+      ) : (
+        ''
       )}
     </div>
   );

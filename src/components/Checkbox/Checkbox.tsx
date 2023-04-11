@@ -16,7 +16,10 @@ const Checkbox = ({ className, onClick, ...children }: ICheckbox) => {
       <span className={style.checkbox__fake}>
         <img src={check} alt='' />
       </span>
-      <span className={style.checkbox__text}>{children.children}</span>
+      <span
+        className={style.checkbox__text}
+        dangerouslySetInnerHTML={{ __html: children.children }}
+      ></span>
     </label>
   );
 };

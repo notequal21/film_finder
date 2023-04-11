@@ -1,42 +1,27 @@
 import Card from '../../../../components/Card/Card';
+import { useAppSelector } from '../../../../store/hooks';
+import { selectResult } from '../../../../store/querySlice';
 import style from './ResultCards.module.scss';
 
 const ResultCards = () => {
+  const resultData = useAppSelector(selectResult);
+
   return (
     <div className={style.result}>
-      <Card
-        className={style.result__item}
-        title='Остаться в живых'
-        duration='1 час 58 минут'
-        genre='Драма'
-        rating={'7,5'}
-        year={1993}
-        director='Лоренс Каздан'
-        actors='Джони Депп, Мэри Стюарт Мастерсон, Энтони Майкл Холл'
-        description='Фильм рассказывает историю молодого человека, который пытается восстановить свои отношения со своей бывшей подругой после того, как он вернулся из тюрьмы.'
-      />
-      <Card
-        className={style.result__item}
-        title='Остаться в живых'
-        duration='1 час 58 минут'
-        genre='Драма'
-        rating={'7,5'}
-        year={1993}
-        director='Лоренс Каздан'
-        actors='Джони Депп, Мэри Стюарт Мастерсон, Энтони Майкл Холл'
-        description='Фильм рассказывает историю молодого человека, который пытается восстановить свои отношения со своей бывшей подругой после того, как он вернулся из тюрьмы.'
-      />
-      <Card
-        className={style.result__item}
-        title='Остаться в живых'
-        duration='1 час 58 минут'
-        genre='Драма'
-        rating={'7,5'}
-        year={1993}
-        director='Лоренс Каздан'
-        actors='Джони Депп, Мэри Стюарт Мастерсон, Энтони Майкл Холл'
-        description='Фильм рассказывает историю молодого человека, который пытается восстановить свои отношения со своей бывшей подругой после того, как он вернулся из тюрьмы.'
-      />
+      {resultData.map((item: any) => (
+        <Card
+          key={item.id}
+          className={style.result__item}
+          title={item.name}
+          duration={item.duration}
+          genre={item.genre}
+          rating={item.rating}
+          year={item.year}
+          director={item.director}
+          actors={item.actors}
+          description={item.description}
+        />
+      ))}
     </div>
   );
 };

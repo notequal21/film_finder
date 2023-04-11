@@ -11,6 +11,13 @@
   color: #000000;
 
   transition: all 0.3s ease;
+
+  @media (max-width: 767px) {
+    padding: 8px 20px;
+    font-size: 16px;
+    line-height: 158.7%;
+  }
+
   &:hover {
     background: rgba($color: #ffffff, $alpha: 0.7);
   }

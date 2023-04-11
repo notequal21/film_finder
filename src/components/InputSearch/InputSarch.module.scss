@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
 
-  @media (max-width: 767px) {
+  @media (max-width: 991px) {
     flex-wrap: wrap;
   }
 
@@ -21,7 +21,7 @@
     position: relative;
     height: 50px;
 
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       width: 100%;
     }
 
@@ -69,12 +69,9 @@
     flex: 0 0 auto;
     margin: 0 0 0 14px;
 
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       flex: 1 1 100%;
-
-      &:not(:first-child) {
-        margin: 12px 0 0;
-      }
+      margin: 16px 0 0;
     }
   }
 }

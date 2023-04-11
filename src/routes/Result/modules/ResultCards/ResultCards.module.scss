@@ -2,9 +2,23 @@
   margin: 60px 0 0;
   display: flex;
 
+  @media (max-width: 991px) {
+    margin: 42px auto 0;
+    flex-wrap: wrap;
+    max-width: 600px;
+  }
+
   &__item {
     &:not(:first-child) {
       margin: 0 0 0 12px;
+    }
+
+    @media (max-width: 991px) {
+      flex: 1 1 100%;
+
+      &:not(:first-child) {
+        margin: 14px 0 0;
+      }
     }
   }
 }

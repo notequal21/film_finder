@@ -14,21 +14,45 @@
     text-align: center;
     letter-spacing: -0.03em;
     color: #ffffff;
+
+    @media (max-width: 767px) {
+      font-size: 32px;
+      line-height: 117.7%;
+    }
   }
+
   &__text {
     font-size: 24px;
     line-height: 150%;
     text-align: center;
     letter-spacing: -0.03em;
     color: #ffffff;
+
+    @media (max-width: 991px) {
+      font-size: 16px;
+      line-height: 150%;
+
+      br {
+        display: none;
+      }
+    }
   }
   &-btns {
     margin: 62px 0 0;
     display: flex;
 
+    @media (max-width: 767px) {
+      margin: 40px 0 0;
+      flex-direction: column;
+    }
+
     &__item {
       &:not(:first-child) {
         margin: 0 0 0 14px;
+
+        @media (max-width: 767px) {
+          margin: 10px 0 0;
+        }
       }
     }
   }

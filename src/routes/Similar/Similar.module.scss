@@ -1,3 +1,13 @@
-.submit {
-  margin: 130px auto 0;
+.similar {
+  &__text {
+    max-width: 790px;
+  }
+  &__input {
+    margin: 60px auto 0;
+    max-width: 470px;
+
+    @media (max-width: 991px) {
+      margin: 24px 0 0;
+    }
+  }
 }

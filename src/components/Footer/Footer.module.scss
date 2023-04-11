@@ -29,21 +29,40 @@
     justify-content: space-between;
     border-top: 1px solid rgba($color: #ffffff, $alpha: 0.3);
 
+    @media (max-width: 767px) {
+      flex-direction: column-reverse;
+      padding: 20px 0;
+    }
+
     &__cr {
       font-weight: 400;
       font-size: 14px;
       line-height: 158.7%;
       letter-spacing: -0.03em;
       color: #ffffff;
+
+      @media (max-width: 767px) {
+        margin: 10px 0 0;
+        font-size: 12px;
+        line-height: 158.7%;
+      }
     }
 
     &__links {
       display: flex;
       align-items: center;
 
+      @media (max-width: 767px) {
+        width: 100%;
+        justify-content: space-between;
+      }
+
       span {
         margin: 0 24px;
         color: #ffffff;
+        @media (max-width: 767px) {
+          margin: 0 10px;
+        }
       }
 
       &Item {
@@ -52,6 +71,11 @@
         line-height: 158.7%;
         letter-spacing: -0.03em;
         color: #ffffff;
+
+        @media (max-width: 767px) {
+          font-size: 12px;
+          line-height: 158.7%;
+        }
 
         &:hover {
           text-decoration: underline;

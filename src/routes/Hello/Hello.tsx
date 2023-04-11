@@ -4,13 +4,19 @@ import { useAppDispatch } from '../../store/hooks';
 import style from './Hello.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { clearAll } from '../../store/querySlice';
+import { clearStepsData, setType } from '../../store/stepsSlice';
 
 const Hello = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  const clearState = () => {
     dispatch(clearAll());
+    dispatch(clearStepsData());
+  };
+
+  useEffect(() => {
+    clearState();
   }, []);
 
   return (
@@ -22,19 +28,31 @@ const Hello = () => {
           </div>
           <div className={`${style.startBody__btns} screen-btns`}>
             <Button
-              onClick={() => navigate('/condition')}
+              onClick={() => {
+                clearState();
+                navigate('/condition');
+                dispatch(setType('condition'));
+              }}
               className={`${style.startBody__btnsItem} screen-btns__item`}
             >
               Поиск по критериям
             </Button>
             <Button
-              onClick={() => navigate('/emotions')}
+              onClick={() => {
+                clearState();
+                navigate('/emotions');
+                dispatch(setType('emotions'));
+              }}
               className={`${style.startBody__btnsItem} screen-btns__item`}
             >
               Поиск по эмоциям
             </Button>
             <Button
-              onClick={() => navigate('/similar')}
+              onClick={() => {
+                clearState();
+                navigate('/similar');
+                dispatch(setType('similar'));
+              }}
               transparent
               className={`${style.startBody__btnsItem} screen-btns__item`}
             >

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
-import style from './InputStep.module.scss';
-import { useRef } from 'react';
+import style from './InputSarch.module.scss';
+import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   addQueryStep,
@@ -12,38 +12,31 @@ import {
 import { nextStep, prevStep } from '../../store/stepsSlice';
 
 // img imports
-import defaultIco from '../../assets/img/icons/arrowSvg';
+import defaultIco from '../../assets/img/icons/searchSvg';
 
-interface IInputStep {
+interface IInputSarch {
   placeholder?: string;
   icon?: any;
   className?: string;
-  isNextStepAllow?: boolean;
   currentStep?: number;
-  setIsNextStepAllow?: any;
   canSkip?: boolean;
   isFinalStep?: boolean;
   noSkip?: boolean;
-  isCustomInput?: boolean;
-  setUserChoiceActive?: any;
 }
 
-const InputStep = ({
+const InputSarch = ({
   placeholder,
   icon,
   className,
-  isNextStepAllow,
   currentStep,
-  setIsNextStepAllow,
   canSkip,
   isFinalStep,
   noSkip,
-  isCustomInput,
-  setUserChoiceActive,
-}: IInputStep) => {
+}: IInputSarch) => {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
+  const [isNextStepAllow, setIsNextStepAllow] = useState(false);
   const queryData = useAppSelector(selectQuery);
 
   return (
@@ -71,14 +64,9 @@ const InputStep = ({
           disabled={!isNextStepAllow}
           onClick={() => {
             if (isNextStepAllow) {
-              if (isFinalStep) {
-                dispatch(addQueryStep([inputRef.current?.value.trim()]));
-                dispatch(getResultAsync(queryData.steps));
-                navigate('/result');
-              } else {
-                dispatch(addQueryStep([inputRef.current?.value.trim()]));
-                dispatch(nextStep());
-              }
+              dispatch(addQueryStep([inputRef.current?.value.trim()]));
+              dispatch(getResultAsync(queryData.steps));
+              navigate('/result');
             }
           }}
         >
@@ -89,28 +77,9 @@ const InputStep = ({
         ''
       ) : (
         <>
-          {noSkip ? (
-            ''
-          ) : (
-            <Button
-              onClick={() => {
-                dispatch(addQueryStep([]));
-                dispatch(nextStep());
-              }}
-              transparent
-              className={style.content__btn}
-            >
-              Пропустить
-            </Button>
-          )}
           <Button
             onClick={() => {
-              if (isCustomInput) {
-                setUserChoiceActive(false);
-              } else if (currentStep) {
-                dispatch(clearSpecific(currentStep - 1));
-                currentStep > 0 ? dispatch(prevStep()) : navigate('/');
-              }
+              navigate('/');
             }}
             transparent
             className={style.content__btn}
@@ -123,4 +92,4 @@ const InputStep = ({
   );
 };
 
-export default InputStep;
+export default InputSarch;

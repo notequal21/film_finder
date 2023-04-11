@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import style from './Emotions.module.scss';
 import Step from '../../components/Step/Step';
-import Button from '../../components/Button/Button';
 import { useAppSelector } from '../../store/hooks';
-import { selectQuery } from '../../store/querySlice';
+import { selectCurrentStep } from '../../store/stepsSlice';
 
 // steps
 const stepsList = [
@@ -45,28 +43,31 @@ const stepsList = [
       ],
       [
         'Пересмотрите свои ценности и приоритеты',
-        'Все проблемы могут быть решены при помощи друзей и силы воли',
+        'Все проблемы могут быть решены при <br/> помощи друзей и силы воли',
         'Свой вариант',
       ],
     ],
   },
   {
     question:
-      '4. Какой год выпуска фильма тебя интересует? Можешь назвать конкретный год или период времени, который тебе ближе, или ответить "Любой".',
+      '4. Какой год выпуска фильма тебя интересует? Можешь назвать конкретный год или <br/> период времени, который тебе ближе, или ответить "Любой".',
     userInput: true,
     hideBtns: true,
   },
   {
     question:
-      '5. В какое место и время событий тебе хотелось бы попасть? Если есть конкретные предпочтения, то можешь их озвучить.',
+      '5. В какое место и время событий тебе хотелось бы попасть? <br/> Если есть конкретные предпочтения, то можешь их озвучить.',
     userInput: true,
     isFinalStep: true,
   },
 ];
 
 const Emotions = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const query = useAppSelector(selectQuery);
+  const currentStep = useAppSelector(selectCurrentStep);
+  // const [currentStep, setCurrentStep] = useState(0);
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+  // const setCurrentStep = (num: number): any => dispatch(setCurrentStep(num));
 
   return (
     <div className={style.emotions}>
@@ -84,7 +85,7 @@ const Emotions = () => {
 
           <ProgressBar
             className={style.emotionsBody__progress}
-            percentage={10}
+            percentage={(100 / (stepsList.length - 1)) * currentStep}
           />
 
           {stepsList.map((item, index: number) => {
@@ -98,21 +99,12 @@ const Emotions = () => {
                   hideBtns={item.hideBtns ? true : false}
                   userInput={item.userInput ? true : false}
                   isFinalStep={item.isFinalStep ? true : false}
-                  setCurrentStep={setCurrentStep}
                 />
               );
             } else {
               return '';
             }
           })}
-
-          {currentStep > 0 ? (
-            <Button onClick={() => {}} className={style.submit}>
-              Начать поиск
-            </Button>
-          ) : (
-            ''
-          )}
         </div>
       </div>
     </div>

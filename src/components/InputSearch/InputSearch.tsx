@@ -5,11 +5,9 @@ import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   addQueryStep,
-  clearSpecific,
   getResultAsync,
   selectQuery,
 } from '../../store/querySlice';
-import { nextStep, prevStep } from '../../store/stepsSlice';
 
 // img imports
 import defaultIco from '../../assets/img/icons/searchSvg';

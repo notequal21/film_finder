@@ -64,10 +64,6 @@ const stepsList = [
 
 const Emotions = () => {
   const currentStep = useAppSelector(selectCurrentStep);
-  // const [currentStep, setCurrentStep] = useState(0);
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
-  // const setCurrentStep = (num: number): any => dispatch(setCurrentStep(num));
 
   return (
     <div className={style.emotions}>

@@ -91,8 +91,9 @@ const Step = ({
                 return (
                   <Checkbox
                     key={index}
+                    name={item.name}
                     onClick={() => {
-                      if (item === 'Свой вариант') {
+                      if (item.title === 'Свой вариант') {
                         setUserChoiceActive(true);
                       } else {
                         allowCheck();
@@ -100,7 +101,7 @@ const Step = ({
                     }}
                     className={style.stepCheckboxes__item}
                   >
-                    {item}
+                    {item.title}
                   </Checkbox>
                 );
               })}
@@ -144,6 +145,7 @@ const Step = ({
       {currentStep > 0 ? (
         <Button
           onClick={() => {
+            // confirmStep();
             dispatch(getResultAsync(queryData.steps));
             navigate('/result');
           }}

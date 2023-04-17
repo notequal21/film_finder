@@ -63,7 +63,8 @@ const InputSarch = ({
           onClick={() => {
             if (isNextStepAllow) {
               dispatch(addQueryStep([inputRef.current?.value.trim()]));
-              dispatch(getResultAsync(queryData.steps));
+              dispatch(getResultAsync([inputRef.current?.value.trim()]));
+              // dispatch(getResultAsync(queryData.steps));
               navigate('/result');
             }
           }}

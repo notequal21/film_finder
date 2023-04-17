@@ -73,7 +73,13 @@ const InputStep = ({
             if (isNextStepAllow) {
               if (isFinalStep) {
                 dispatch(addQueryStep([inputRef.current?.value.trim()]));
-                dispatch(getResultAsync(queryData.steps));
+                // dispatch(getResultAsync(queryData.steps));
+                dispatch(
+                  getResultAsync([
+                    ...queryData.steps,
+                    [inputRef.current?.value.trim()],
+                  ])
+                );
                 navigate('/result');
               } else {
                 dispatch(addQueryStep([inputRef.current?.value.trim()]));

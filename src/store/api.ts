@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 export const fetchResult = (queryData: any) => {
+  console.log(queryData.join());
+
   return axios
-    .get('http://localhost:3001/film_list', {
+    .get('http://localhost:5000/film_list', {
       params: {
-        emotions: queryData[0],
+        query: queryData.join(),
       },
     })
     .then(function (response) {
